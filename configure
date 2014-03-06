@@ -636,12 +636,6 @@ int main(int argc, char **argv)
   return clock_gettime(0, NULL);
 }
 EOF
-if compile_prog "" "" "clock_gettime"; then
-    clock_gettime="yes"
-elif compile_prog "" "-lrt" "clock_gettime"; then
-    clock_gettime="yes"
-    LIBS="-lrt $LIBS"
-fi
 echo "clock_gettime                 $clock_gettime"
 
 ##########################################
@@ -846,6 +840,9 @@ int main(int argc, char **argv)
   return 0;
 }
 EOF
+if compile_prog "" "" "strsep"; then
+  strsep="yes"
+fi
 echo "strsep                        $strsep"
 
 ##########################################
@@ -858,9 +855,6 @@ int main(int argc, char **argv)
   return strcasestr(argv[0], argv[1]) != NULL;
 }
 EOF
-if compile_prog "" "" "strcasestr"; then
-  strcasestr="yes"
-fi
 echo "strcasestr                    $strcasestr"
 
 ##########################################
@@ -1102,10 +1096,6 @@ int main(int argc, char **argv)
   return 0;
 }
 EOF
-if compile_prog "" "-lrbd -lrados" "rbd"; then
-  LIBS="-lrbd -lrados $LIBS"
-  rbd="yes"
-fi
 echo "Rados Block Device engine     $rbd"
 
 
