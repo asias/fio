@@ -592,7 +592,7 @@ int main(int argc, char **argv)
 }
 EOF
 if compile_prog "" "" "sched_setaffinity(,,)"; then
-  linux_3arg_affinity="yes"
+  linux_3arg_affinity="no"
 else
   cat > $TMPC << EOF
 #include <sched.h>
@@ -603,7 +603,7 @@ int main(int argc, char **argv)
 }
 EOF
   if compile_prog "" "" "sched_setaffinity(,)"; then
-    linux_2arg_affinity="yes"
+    linux_2arg_affinity="no"
   fi
 fi
 echo "sched_setaffinity(3 arg)      $linux_3arg_affinity"

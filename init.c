@@ -1429,7 +1429,7 @@ static int fill_def_thread(void)
 {
 	memset(&def_thread, 0, sizeof(def_thread));
 
-	fio_getaffinity(getpid(), &def_thread.o.cpumask);
+	//fio_getaffinity(getpid(), &def_thread.o.cpumask);
 	def_thread.o.timeout = def_timeout;
 	def_thread.o.error_dump = 1;
 	/*
