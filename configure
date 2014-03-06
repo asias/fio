@@ -818,10 +818,6 @@ int main(int argc, char **argv)
   return numa_available();
 }
 EOF
-if test "$disable_numa" != "yes"  && compile_prog "" "-lnuma" "libnuma"; then
-  libnuma="yes"
-  LIBS="-lnuma $LIBS"
-fi
 echo "libnuma                       $libnuma"
 
 ##########################################
@@ -836,9 +832,6 @@ int main(int argc, char **argv)
   return 0;
 }
 EOF
-if compile_prog "" "" "libnuma api"; then
-  libnuma_v2="yes"
-fi
 echo "libnuma v2                    $libnuma_v2"
 fi
 
@@ -853,9 +846,6 @@ int main(int argc, char **argv)
   return 0;
 }
 EOF
-if compile_prog "" "" "strsep"; then
-  strsep="yes"
-fi
 echo "strsep                        $strsep"
 
 ##########################################
@@ -886,9 +876,6 @@ int main(int argc, char **argv)
   return c;
 }
 EOF
-if compile_prog "" "" "getopt_long_only"; then
-  getopt_long_only="yes"
-fi
 echo "getopt_long_only()            $getopt_long_only"
 
 ##########################################
