@@ -418,10 +418,6 @@ int main(void)
   return 0;
 }
 EOF
-if compile_prog "" "-lz" "zlib" ; then
-  zlib=yes
-  LIBS="-lz $LIBS"
-fi
 echo "zlib                          $zlib"
 
 ##########################################
@@ -436,15 +432,6 @@ int main(void)
   return 0;
 }
 EOF
-if compile_prog "" "-laio" "libaio" ; then
-  libaio=yes
-  LIBS="-laio $LIBS"
-else
-  if test "$libaio" = "yes" ; then
-    feature_not_found "linux AIO" "libaio-dev or libaio-devel"
-  fi
-  libaio=no
-fi
 echo "Linux AIO support             $libaio"
 
 ##########################################
@@ -460,13 +447,6 @@ int main(void)
   return 0;
 }
 EOF
-if compile_prog "" "" "posixaio" ; then
-  posix_aio="yes"
-elif compile_prog "" "-lrt" "posixaio"; then
-  posix_aio="yes"
-  posix_aio_lrt="yes"
-  LIBS="-lrt $LIBS"
-fi
 echo "POSIX AIO support             $posix_aio"
 echo "POSIX AIO support needs -lrt  $posix_aio_lrt"
 
@@ -484,9 +464,6 @@ int main(void)
   return 0;
 }
 EOF
-  if compile_prog "" "$LIBS" "posix_aio_fsync" ; then
-    posix_aio_fsync=yes
-  fi
 fi
 echo "POSIX AIO fsync               $posix_aio_fsync"
 
@@ -543,10 +520,6 @@ int main(int argc, char **argv)
   return 0;
 }
 EOF
-if compile_prog "" "-libverbs" "libverbs" ; then
-    libverbs="yes"
-    LIBS="-libverbs $LIBS"
-fi
 echo "libverbs                      $libverbs"
 
 ##########################################
@@ -561,10 +534,6 @@ int main(int argc, char **argv)
   return 0;
 }
 EOF
-if compile_prog "" "-lrdmacm" "rdma"; then
-    rdmacm="yes"
-    LIBS="-lrdmacm $LIBS"
-fi
 echo "rdmacm                        $rdmacm"
 
 ##########################################
@@ -580,9 +549,6 @@ int main(int argc, char **argv)
   return r;
 }
 EOF
-if compile_prog "" "" "linux_fallocate"; then
-    linux_fallocate="yes"
-fi
 echo "Linux fallocate               $linux_fallocate"
 
 ##########################################
@@ -597,9 +563,6 @@ int main(int argc, char **argv)
   return r;
 }
 EOF
-if compile_prog "" "" "posix_fadvise"; then
-    posix_fadvise="yes"
-fi
 echo "POSIX fadvise                 $posix_fadvise"
 
 ##########################################
@@ -614,9 +577,6 @@ int main(int argc, char **argv)
   return r;
 }
 EOF
-if compile_prog "" "" "posix_fallocate"; then
-    posix_fallocate="yes"
-fi
 echo "POSIX fallocate               $posix_fallocate"
 
 ##########################################
