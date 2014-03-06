@@ -917,9 +917,6 @@ int main(int argc, char **argv)
   return ret;
 }
 EOF
-if compile_prog "" "" "__thread"; then
-  tls_thread="yes"
-fi
 echo "__thread                      $tls_thread"
 
 ##########################################
